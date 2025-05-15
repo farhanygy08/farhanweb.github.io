@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Panel Pesan Anonim</title>
+  <meta charset="UTF-8" />
+  <title>Pesan Anonim Firebase v9+</title>
   <style>
     body { font-family: sans-serif; text-align: center; padding: 20px; }
-    .pesan { border: 1px solid #ccc; margin: 10px auto; padding: 10px; width: 80%; text-align: left; }
-    h1 { color: #333; }
+    textarea { width: 300px; height: 100px; }
+    button { padding: 10px 20px; margin-top: 10px; }
+    .pesan { margin: 10px; padding: 10px; border: 1px solid #ccc; text-align: left; }
   </style>
   <script type="module">
     // Import modul Firebase yang dibutuhkan
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-    import { getDatabase, ref, onChildAdded } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
-    // Konfigurasi Firebase
+    // Konfigurasi Firebase kamu
     const firebaseConfig = {
       apiKey: "AIzaSyDpbVmwAuWq2Edyk-pdm9wTyBO_j5iKnBU",
       authDomain: "pesan-anonim-farhan.firebaseapp.com",
@@ -29,20 +30,39 @@
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
 
-    // Ambil data pesan
+    // Fungsi kirim pesan
+    window.kirimPesan = function() {
+      const pesanInput = document.getElementById("pesanInput");
+      const pesan = pesanInput.value.trim();
+      if (pesan !== "") {
+        push(ref(database, "pesan"), {
+          teks: pesan,
+          waktu: Date.now()
+        });
+        pesanInput.value = "";
+      } else {
+        alert("Pesan tidak boleh kosong!");
+      }
+    };
+
+    // Fungsi tampilkan pesan realtime
     const daftarPesan = document.getElementById("daftarPesan");
     onChildAdded(ref(database, "pesan"), (snapshot) => {
       const data = snapshot.val();
       const kotak = document.createElement("div");
       kotak.className = "pesan";
-      kotak.innerHTML = `<strong>Pesan:</strong> ${data.teks}<br><small>${new Date(data.waktu).toLocaleString()}</small>`;
+      kotak.textContent = data.teks;
       daftarPesan.prepend(kotak);
     });
   </script>
 </head>
 <body>
 
-  <h1>Admin Panel - Pesan Anonim Masuk</h1>
+  <h1>Kirim Pesan Anonim</h1>
+  <textarea id="pesanInput" placeholder="Tulis pesan di sini..."></textarea><br>
+  <button onclick="kirimPesan()">Kirim</button>
+
+  <h2>Pesan Masuk</h2>
   <div id="daftarPesan"></div>
 
 </body>
