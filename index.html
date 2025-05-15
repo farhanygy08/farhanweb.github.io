@@ -1,73 +1,49 @@
 <!DOCTYPE html>
-<html class="preload" lang="en">
-  <head>
-    <!-- Site designed for Drop by the team at 
-    ███╗   ██╗███████╗████████╗██╗     ██╗███████╗██╗   ██╗
-    ████╗  ██║██╔════╝╚══██╔══╝██║     ██║██╔════╝╚██╗ ██╔╝
-    ██╔██╗ ██║█████╗     ██║   ██║     ██║█████╗   ╚████╔╝ 
-    ██║╚██╗██║██╔══╝     ██║   ██║     ██║██╔══╝    ╚██╔╝  
-    ██║ ╚████║███████╗   ██║   ███████╗██║██║        ██║   
-    ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝        ╚═╝    -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel Pesan Anonim</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; }
+    .pesan { border: 1px solid #ccc; margin: 10px auto; padding: 10px; width: 80%; text-align: left; }
+    h1 { color: #333; }
+  </style>
+  <script type="module">
+    // Import modul Firebase yang dibutuhkan
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getDatabase, ref, onChildAdded } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
-    <!-- The name of your site that shows up in the browser tab -->
-    <title>Welcome to my site</title>
+    // Konfigurasi Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDpbVmwAuWq2Edyk-pdm9wTyBO_j5iKnBU",
+      authDomain: "pesan-anonim-farhan.firebaseapp.com",
+      databaseURL: "https://pesan-anonim-farhan-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "pesan-anonim-farhan",
+      storageBucket: "pesan-anonim-farhan.firebasestorage.app",
+      messagingSenderId: "286955932611",
+      appId: "1:286955932611:web:ddcce4f09e4cfde85ccb76",
+      measurementId: "G-SBZCRHWN7Z"
+    };
 
-    <!-- Describe what your site is about -->
-    <meta name="description" content="A list of places you can find me on the web.">
+    // Inisialisasi Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
 
-    <!-- This is the small icon that shows up in the browser tab -->
-    <link rel="shortcut icon" href="/images/favicon.png">
+    // Ambil data pesan
+    const daftarPesan = document.getElementById("daftarPesan");
+    onChildAdded(ref(database, "pesan"), (snapshot) => {
+      const data = snapshot.val();
+      const kotak = document.createElement("div");
+      kotak.className = "pesan";
+      kotak.innerHTML = `<strong>Pesan:</strong> ${data.teks}<br><small>${new Date(data.waktu).toLocaleString()}</small>`;
+      daftarPesan.prepend(kotak);
+    });
+  </script>
+</head>
+<body>
 
-    <!-- Styling for this site -->
-    <link rel="stylesheet" href="/css/styles.css">
-  </head>
+  <h1>Admin Panel - Pesan Anonim Masuk</h1>
+  <div id="daftarPesan"></div>
 
-  <!-- This class is removed if the user has JavaScript enabled -->
-  <body class="no-js">
-    <header>
-      <!-- Dark mode toggle -->
-      <div class="mode-toggle">
-        <button class="[ toggle-button ] [ js-mode-toggle ]">
-          <span class="toggle-icon" aria-hidden="true"></span>
-          <span class="[ toggle-text ] [ js-mode-toggle-text ]">Switch to dark theme</span>
-        </button>
-      </div>
-    </header>
-    <main>
-      <section class="about">
-        <h1>Frodo Baggins</h1>
-        <p>Frodo is a proven leader who thrives in small teams and can go the distance.</p>
-      </section>
-      <nav class="links">
-        <!-- Update <a href=""> to point to your accounts -->
-        <!-- Update <span> to your usernames -->
-        <a href="mailto:frodo@bag.end">
-          <strong>E-mail</strong>
-          <span>frodo@bag.end</span>
-        </a>
-        <a href="https://twitter.com/frodobaggins">
-          <strong>Twitter</strong>
-          <span>@frodobaggins</span>
-        </a>
-        <a href="https://linkedin.com">
-          <strong>LinkedIn</strong>
-          <span>@frodobaggins</span>
-        </a>
-        <a href="https://github.com">
-          <strong>GitHub</strong>
-          <span>@frodobags</span>
-        </a>
-        <a href="https://codepen.io">
-          <strong>CodePen</strong>
-          <span>@frodobags</span>
-        </a>
-      </nav>
-    </main>
-
-    <!-- Dark mode button functionality -->
-    <script src="/js/dark-mode.js"></script>
-  </body>
+</body>
 </html>
