@@ -3,254 +3,155 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Romantic Proposal</title>
-<!-- Google Fonts: Poppins for cute, clean style -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+<title>Will You Be My Girlfriend? 💖</title>
 <style>
-  /* Background gradient soft pink */
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap');
   body {
     margin: 0;
     height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
-    overflow: hidden;
-    position: relative;
-    color: #4a2c2a;
+    background: radial-gradient(circle at center, #ffd6e8, #ff9ab8 70%);
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #650920;
+    overflow: hidden;
   }
-
   .container {
-    z-index: 10;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 25px;
+    padding: 40px 50px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.5);
     max-width: 400px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 2.5rem 2rem;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4);
-  }
-
-  h1 {
-    font-size: 2.8rem;
-    margin: 0 0 1rem;
-    font-weight: 700;
-    color: #c74b73;
-    text-shadow: 1px 1px 3px #f7c9d5;
-  }
-
-  p {
-    font-size: 1.2rem;
-    margin: 0 0 2rem;
-    font-weight: 500;
-    color: #7a454b;
-    line-height: 1.4;
-  }
-
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  button {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    padding: 0.75rem 1.8rem;
-    border-radius: 30px;
-    cursor: pointer;
-    border: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 10px rgba(199, 75, 115, 0.4);
-  }
-
-  button:focus {
-    outline: none;
-    box-shadow: 0 0 8px 3px rgba(199, 75, 115, 0.6);
-  }
-
-  #yes-btn {
-    background-color: #c74b73;
-    color: #fff;
-  }
-  #yes-btn:hover {
-    background-color: #d35d89;
-  }
-
-  #no-btn {
-    background-color: #f7c9d5;
-    color: #7a454b;
+    width: 90%;
     position: relative;
   }
-  #no-btn:hover {
-    background-color: #f9d6db;
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    margin-bottom: 15px;
   }
-
-  /* Floating hearts styles */
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+  button {
+    background: #ff5ca6;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 12px 35px;
+    margin: 0 10px;
+    border-radius: 35px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 92, 166, 0.6);
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  button:hover {
+    background: #e34e91;
+    transform: scale(1.05);
+  }
+  .yes {
+    background: #e91e63;
+    box-shadow: 0 6px 25px rgba(233, 30, 99, 0.7);
+  }
+  .yes:hover {
+    background: #c2185b;
+  }
+  .no {
+    background: #ba8d99;
+    box-shadow: 0 6px 25px rgba(186, 141, 153, 0.7);
+  }
+  .no:hover {
+    background: #a17680;
+  }
+  .result {
+    margin-top: 25px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #880e4f;
+    min-height: 48px;
+  }
+  /* Romantic hearts animation background */
   .heart {
-    position: fixed;
+    position: absolute;
     width: 20px;
     height: 20px;
-    background-color: #ff557f;
-    opacity: 0.8;
-    transform-origin: center;
-    animation-name: floatUp, pulseScale;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
+    background: #ff2d55;
+    transform: rotate(-45deg);
+    border-radius: 20px 20px 0 0;
   }
-  /* Heart shape using clip-path */
   .heart::before,
   .heart::after {
     content: "";
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: #ff557f;
+    background: #ff2d55;
     border-radius: 50%;
-    top: 0;
-    left: 0;
   }
   .heart::before {
-    transform: translate(-50%, 0);
+    top: -10px;
+    left: 0;
   }
   .heart::after {
-    transform: translate(50%, 0);
+    left: 10px;
+    top: 0;
   }
-
+  /* Animate hearts floating upward and fading */
   @keyframes floatUp {
     0% {
-      opacity: 0.8;
-      transform: translateY(0) scale(1);
-    }
-    50% {
       opacity: 1;
-      transform: translateY(-20px) scale(1.1);
+      transform: translateY(0) scale(1);
     }
     100% {
       opacity: 0;
-      transform: translateY(-80px) scale(0.9);
-    }
-  }
-
-  @keyframes pulseScale {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.15);
-    }
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    .container {
-      padding: 2rem 1.5rem;
-      max-width: 90vw;
-    }
-    h1 {
-      font-size: 2rem;
-    }
-    p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    button {
-      font-size: 1rem;
-      padding: 0.6rem 1.4rem;
+      transform: translateY(-120px) scale(0.5);
     }
   }
 </style>
 </head>
 <body>
-  <div class="container" role="main" aria-label="Romantic proposal message">
-    <h1>Will you be my girlfriend?</h1>
-    <p>You always brighten my day and I really like you.</p>
-    <div class="buttons">
-      <button id="yes-btn" type="button" aria-label="Yes, I want to!">Yes, I want to!</button>
-      <button id="no-btn" type="button" aria-label="No, I don't want to!">No, I don't want to!</button>
-    </div>
+  <div class="container" role="main" aria-label="Love Proposal Form">
+    <h1>Will You Be My Girlfriend?</h1>
+    <p>Choose your answer:</p>
+    <button class="yes" aria-label="Yes, I will be your girlfriend" onclick="showResponse('yes')">Yes 💖</button>
+    <button class="no" aria-label="No, sorry" onclick="showResponse('no')">No 😔</button>
+    <div class="result" id="response" aria-live="polite" aria-atomic="true"></div>
   </div>
 
-<script>
-  // Yes button click handler
-  const yesBtn = document.getElementById('yes-btn');
-  yesBtn.addEventListener('click', () => {
-    alert('Yay! Thank you, love!');
-    console.log('She said yes!');
-  });
+  <script>
+    const responseDiv = document.getElementById('response');
 
-  // No button movement logic
-  const noBtn = document.getElementById('no-btn');
-
-  // To keep track if button is moving to avoid jumpy multiple triggers
-  let moving = false;
-
-  function moveButtonRandomly() {
-    if (moving) return;
-    moving = true;
-
-    const button = noBtn;
-    const buttonRect = button.getBoundingClientRect();
-    const bodyRect = document.body.getBoundingClientRect();
-
-    // Calculate available viewport bounds minus button size and some margin
-    const maxX = window.innerWidth - buttonRect.width - 20;
-    const maxY = window.innerHeight - buttonRect.height - 20;
-
-    // Generate random positions within allowed bounds
-    const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
-
-    // Smoothly move the button using CSS transform with transition
-    button.style.transition = 'transform 0.5s ease';
-    button.style.transform = `translate(${randomX - buttonRect.left}px, ${randomY - buttonRect.top}px)`;
-
-    // After transition ends, unset moving flag
-    function transitionEndHandler() {
-      moving = false;
-      button.removeEventListener('transitionend', transitionEndHandler);
+    function showResponse(answer) {
+      if (answer === 'yes') {
+        responseDiv.textContent = "Thank you, love! ❤️";
+      } else {
+        responseDiv.textContent = "It's okay, no worries! 😊";
+      }
     }
-    button.addEventListener('transitionend', transitionEndHandler);
-  }
 
-  // Trigger the move on either mouse enter or mousedown (to block click)
-  noBtn.addEventListener('mouseenter', moveButtonRandomly);
-  noBtn.addEventListener('mousedown', (event) => {
-    event.preventDefault(); // Prevent click
-    moveButtonRandomly();
-  });
+    // Create floating hearts around container for romantic vibe
+    const container = document.querySelector('.container');
 
-  // Floating hearts creation and animation
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    // Random horizontal starting position
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    // Start near bottom
-    heart.style.bottom = '-20px';
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      const size = Math.random() * 15 + 10 + 'px';
+      heart.style.width = size;
+      heart.style.height = size;
+      heart.style.left = Math.random() * (container.clientWidth - 20) + 'px';
+      heart.style.top = container.clientHeight + 'px';
+      heart.style.animation = `floatUp ${4 + Math.random() * 3}s ease forwards`;
+      container.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
 
-    // Random animation duration and delay for variance
-    const duration = 4000 + Math.random() * 3000; // 4-7 seconds
-    heart.style.animationDuration = `${duration}ms, ${duration/2}ms`;
-    // Random opacity variance
-    heart.style.opacity = 0.7 + Math.random() * 0.3;
-
-    document.body.appendChild(heart);
-
-    // Remove heart after animation finishes
-    setTimeout(() => {
-      heart.remove();
-    }, duration);
-  }
-
-  // Continuously create hearts at intervals
-  setInterval(createHeart, 500);
-
-</script>
+    setInterval(createHeart, 500);
+  </script>
 </body>
 </html>
-
